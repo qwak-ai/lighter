@@ -80,7 +80,11 @@ public class SessionService {
             return;
         }
 
-        var sessionCount = applicationStorage.findApplications(SESSIONS, 0, maxRunning).size();
+        var runningSessions = applicationStorage
+                .findApplicationsByStates(ApplicationType.SESSION, ApplicationState.runningStates(), SortOrder.ASC, 0, Integer.MAX_VALUE);
+        var runningPermanentSessions = applicationStorage
+                .findApplicationsByStates(ApplicationType.PERMANENT_SESSION, ApplicationState.runningStates(), SortOrder.ASC, 0, Integer.MAX_VALUE);
+        var sessionCount = runningSessions.size() + runningPermanentSessions.size();
         if (sessionCount >= maxRunning) {
             throw new SessionLimitExceededException(maxRunning);
         }

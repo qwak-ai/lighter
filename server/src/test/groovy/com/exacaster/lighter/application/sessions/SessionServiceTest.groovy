@@ -78,7 +78,7 @@ class SessionServiceTest extends Specification {
         given:
         def session1 = ApplicationBuilder.builder().setAppId("app1")
                 .setType(ApplicationType.SESSION)
-                .setState(ApplicationState.NOT_STARTED)
+                .setState(ApplicationState.IDLE)
                 .setAppInfo("info")
                 .setCreatedAt(LocalDateTime.now())
                 .setId("session1")
@@ -86,7 +86,7 @@ class SessionServiceTest extends Specification {
                 .build()
         def session2 = ApplicationBuilder.builder().setAppId("app2")
                 .setType(ApplicationType.SESSION)
-                .setState(ApplicationState.IDLE)
+                .setState(ApplicationState.BUSY)
                 .setAppInfo("info")
                 .setCreatedAt(LocalDateTime.now())
                 .setId("session2")
