@@ -82,8 +82,7 @@ public class SessionService {
 
         var runningSessions = applicationStorage
                 .findApplicationsByStates(ApplicationType.SESSION, ApplicationState.runningStates(), SortOrder.ASC, 0, maxRunning);
-        var sessionCount = runningSessions.size();
-        if (sessionCount >= maxRunning) {
+        if (runningSessions.size() >= maxRunning) {
             throw new SessionLimitExceededException(maxRunning);
         }
     }
